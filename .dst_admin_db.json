@@ -1,0 +1,17 @@
+{
+  "SCHEDULE_UPDATE_MAP": {
+    "06:00:00": 0
+  },
+  "SCHEDULE_BACKUP_MAP": {
+    "18:00:00": 0,
+    "06:00:00": 0
+  },
+  "USER_INFO": {
+    "username": "MrMao",
+    "password": "jihuangfuwuqi123321!!!!",
+    "nickname": "管理员"
+  },
+  "masterPort": "10888",
+  "groundPort": "10999",
+  "cavesPort": "10998"
+}

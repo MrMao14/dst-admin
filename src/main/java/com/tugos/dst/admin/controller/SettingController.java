@@ -1,6 +1,7 @@
 package com.tugos.dst.admin.controller;
 
 
+import cn.hutool.json.JSONObject;
 import com.tugos.dst.admin.common.ResultVO;
 import com.tugos.dst.admin.service.SettingService;
 import com.tugos.dst.admin.vo.GameConfigVO;
@@ -27,6 +28,11 @@ public class SettingController {
 
     private SettingService settingService;
 
+    @Autowired
+    public void setSettingService(SettingService settingService) {
+        this.settingService = settingService;
+    }
+
     @GetMapping("/index")
     @RequiresAuthentication
     public String index(HttpServletRequest request) {
@@ -38,6 +44,19 @@ public class SettingController {
             request.setAttribute("lang", "en");
         }
         return "/setting/index";
+    }
+
+    @GetMapping("/createConfig")
+    @RequiresAuthentication
+    public String createConfig(HttpServletRequest request) {
+        log.info("进入创建存档");
+        Locale locale = LocaleContextHolder.getLocale();
+        if (Locale.CHINA.getLanguage().equals(locale.getLanguage())) {
+            request.setAttribute("lang", "zh");
+        } else {
+            request.setAttribute("lang", "en");
+        }
+        return "/setting/createConfig";
     }
 
     @PostMapping("/saveConfig")
@@ -57,8 +76,12 @@ public class SettingController {
         return ResultVO.data(config);
     }
 
-    @Autowired
-    public void setSettingService(SettingService settingService) {
-        this.settingService = settingService;
+    @PostMapping(value = "/createNewConfig",produces = {"application/json;charset=UTF-8"})
+    @RequiresAuthentication
+    @ResponseBody
+    public String saveConfig1(@RequestBody JSONObject cluster){
+        log.info(cluster.toString());
+        return "存档创建成功";
     }
+
 }
